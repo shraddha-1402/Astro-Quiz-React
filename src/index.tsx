@@ -4,6 +4,19 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { initializeApp } from "firebase/app";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCFj3LT5eKykepGw2udtDmYsmb5sBXlH9Y",
+  authDomain: "astronomy-quiz-react.firebaseapp.com",
+  projectId: "astronomy-quiz-react",
+  storageBucket: "astronomy-quiz-react.appspot.com",
+  messagingSenderId: "971999846040",
+  appId: "1:971999846040:web:31768aa241959e66453aed"
+};
+
+const app = initializeApp(firebaseConfig);
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
