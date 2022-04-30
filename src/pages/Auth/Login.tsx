@@ -50,6 +50,7 @@ const LoginPage = () => {
               value={password}
               name="password"
               onChange={handleInputChange}
+              autoComplete="off"
             />
             <span
               className="show-password-btn"
