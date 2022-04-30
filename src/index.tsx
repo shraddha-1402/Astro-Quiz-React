@@ -1,8 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 
 // firebase
 import { initializeApp } from "firebase/app";
@@ -10,14 +11,13 @@ import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
 import { getAuth, connectAuthEmulator } from "firebase/auth";
 import { getStorage, connectStorageEmulator } from "firebase/storage";
 
-
 const firebaseConfig = {
   apiKey: "AIzaSyCFj3LT5eKykepGw2udtDmYsmb5sBXlH9Y",
   authDomain: "astronomy-quiz-react.firebaseapp.com",
   projectId: "astronomy-quiz-react",
   storageBucket: "astronomy-quiz-react.appspot.com",
   messagingSenderId: "971999846040",
-  appId: "1:971999846040:web:31768aa241959e66453aed"
+  appId: "1:971999846040:web:31768aa241959e66453aed",
 };
 
 const app = initializeApp(firebaseConfig);
@@ -41,11 +41,13 @@ if (process.env.NODE_ENV === "development") {
 }
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </React.StrictMode>
 );
 

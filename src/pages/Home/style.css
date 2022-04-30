@@ -1,0 +1,21 @@
+.quiz-card:hover {
+  box-shadow: 2px 2px 8px #020913, -2px -2px 8px #093066;
+  transition: box-shadow 0.2s ease-in;
+}
+.quiz-card {
+  transition: box-shadow 0.2s ease-out;
+}
+.card-img-box {
+  width: 100%;
+  position: relative;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}
+.quiz-card-btn {
+  transition: background-color 0.2s ease-out;
+}
+.quiz-card-btn:hover {
+  color: var(--primary-color);
+  background-color: var(--white);
+  transition: background-color 0.2s ease-in;
+}
