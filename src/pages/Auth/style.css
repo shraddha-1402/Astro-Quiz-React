@@ -1,0 +1,22 @@
+.btn-solid-secondary {
+  background-color: lightgray;
+  border-color: lightgray;
+}
+
+.std-input {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--white);
+}
+
+.std-input:focus {
+  background-color: #030e1d;
+}
+
+.show-password-btn {
+  position: absolute;
+  right: 0.65rem;
+  top: 0.7rem;
+  font-size: 1.2em;
+  cursor: pointer;
+}
