@@ -1,12 +1,13 @@
 import { Dispatch } from "react";
 import { NavigateFunction } from "react-router-dom";
-import { auth } from "..";
+import { auth, db } from "..";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { ActionType, LocalRoutes } from "../constants";
 import { AuthAction, LoginCreds, SignupCred } from "../types";
+import { doc, setDoc } from "firebase/firestore";
 
 const loginHandler = async ({
   credentials,
@@ -16,7 +17,7 @@ const loginHandler = async ({
   credentials: LoginCreds;
   authDispatch: Dispatch<AuthAction>;
   navigate: NavigateFunction;
-}) => {
+}): Promise<void> => {
   try {
     const { email, password } = credentials;
     const { user } = await signInWithEmailAndPassword(auth, email, password);
@@ -33,4 +34,26 @@ const loginHandler = async ({
   }
 };
 
-export { loginHandler };
+const signupHandler = async ({
+  credentials,
+  navigate,
+}: {
+  credentials: SignupCred;
+  navigate: NavigateFunction;
+}): Promise<void> => {
+  try {
+    const { firstName, lastName, email, password } = credentials;
+    const { user } = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    const token = await user.getIdToken();
+    await setDoc(doc(db, "users", user.uid), { firstName, lastName, email });
+    if (token) navigate(LocalRoutes.LOGIN_PAGE);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { loginHandler, signupHandler };
