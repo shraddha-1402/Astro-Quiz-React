@@ -12,8 +12,8 @@ const Navbar = () => {
         </Link>
 
         <div className="flex-row gap-1 align-center m-0-5">
-          <FaTrophy className="sm-icon mr-1 curr-pointer" />
-          <FaUser className="sm-icon curr-pointer" />
+          <FaTrophy className="sm-icon mr-1 curr-pointer" title="Dashboard" />
+          <FaUser className="sm-icon curr-pointer" title="Login" />
         </div>
       </div>
     </nav>
