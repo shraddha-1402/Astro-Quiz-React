@@ -1,2 +1,2 @@
 export { getFeaturedQuizes } from "./featured-quizes-handler";
-export { loginHandler } from "./auth";
+export { loginHandler, signupHandler } from "./auth";
