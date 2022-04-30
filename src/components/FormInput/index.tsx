@@ -1,5 +1,4 @@
 import { ChangeEvent } from "react";
-import "./style.css";
 
 const FormInput = ({
   type,
