@@ -9,7 +9,7 @@ import {
 } from "firebase/auth";
 import { ActionType, LocalRoutes } from "../constants";
 import { AuthAction, LoginCreds, SignupCred } from "../types";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { isFBError } from "../types/typeguards";
 
 const loginHandler = async ({
@@ -24,15 +24,21 @@ const loginHandler = async ({
   try {
     const { email, password } = credentials;
     const { user } = await signInWithEmailAndPassword(auth, email, password);
-    authDispatch({
-      type: ActionType.USER_LOGIN,
-      payload: {
+    const userData = await getDoc(doc(db, `users/${user.uid}`));
+    if (userData.exists()) {
+      const { firstName, lastName, email } = userData.data();
+      const quizUserData = {
         token: await user.getIdToken(),
-        userInfo: { email: user.email, name: user.displayName },
-      },
-    });
-    navigate(LocalRoutes.HOME);
-    toast.success("Logged in successfully!");
+        userInfo: { email: email, name: `${firstName} ${lastName}` },
+      };
+      authDispatch({
+        type: ActionType.USER_LOGIN,
+        payload: quizUserData,
+      });
+      localStorage.setItem("quizUserData", JSON.stringify(quizUserData));
+      navigate(LocalRoutes.HOME);
+      toast.success("Logged in successfully!");
+    }
   } catch (error: unknown) {
     if (isFBError(error)) {
       switch (error.code) {
@@ -78,7 +84,7 @@ const signupHandler = async ({
           break;
       }
     } else {
-      console.log(error.code);
+      console.log(error);
       toast.error("Something went wrong", { autoClose: 1500 });
     }
   }

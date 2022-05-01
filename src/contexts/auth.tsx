@@ -9,7 +9,7 @@ const AuthContext = createContext<DefaultAuthValue>({
 const useAuth = () => useContext(AuthContext);
 
 const AuthProvider = ({ children }: { children: JSX.Element }) => {
-  const localData = localStorage.getItem("data");
+  const localData = localStorage.getItem("quizUserData");
   const userData = localData ? JSON.parse(localData) : null;
   const [authState, authDispatch] = useReducer(authReducer, {
     token: userData ? userData.token : null,
