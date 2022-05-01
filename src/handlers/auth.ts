@@ -1,13 +1,16 @@
 import { Dispatch } from "react";
 import { NavigateFunction } from "react-router-dom";
+import { toast } from "react-toastify";
 import { auth, db } from "..";
 import {
+  AuthErrorCodes,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { ActionType, LocalRoutes } from "../constants";
 import { AuthAction, LoginCreds, SignupCred } from "../types";
 import { doc, setDoc } from "firebase/firestore";
+import { isFBError } from "../types/typeguards";
 
 const loginHandler = async ({
   credentials,
@@ -29,8 +32,18 @@ const loginHandler = async ({
       },
     });
     navigate(LocalRoutes.HOME);
-  } catch (error) {
-    console.error(error);
+    toast.success("Logged in successfully!");
+  } catch (error: unknown) {
+    if (isFBError(error)) {
+      switch (error.code) {
+        case AuthErrorCodes.INVALID_PASSWORD:
+          toast.error("Wrong Credentials", { autoClose: 1500 });
+          break;
+        default:
+          toast.error(`${error.code.split("/")[1].split("-").join(" ")}`);
+          break;
+      }
+    } else console.error(error);
   }
 };
 
@@ -49,10 +62,25 @@ const signupHandler = async ({
       password
     );
     const token = await user.getIdToken();
-    await setDoc(doc(db, "users", user.uid), { firstName, lastName, email });
-    if (token) navigate(LocalRoutes.LOGIN_PAGE);
+    if (token) {
+      await setDoc(doc(db, "users", user.uid), { firstName, lastName, email });
+      navigate(LocalRoutes.LOGIN_PAGE);
+      toast.success("Signed up successfully!");
+    }
   } catch (error) {
-    console.log(error);
+    if (isFBError(error)) {
+      switch (error.code) {
+        case AuthErrorCodes.EMAIL_EXISTS:
+          toast.error("Email already registered", { autoClose: 2000 });
+          break;
+        default:
+          toast.error(`${error.code.split("/")[1].split("-").join(" ")}`);
+          break;
+      }
+    } else {
+      console.log(error.code);
+      toast.error("Something went wrong", { autoClose: 1500 });
+    }
   }
 };
 
