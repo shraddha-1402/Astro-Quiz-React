@@ -2,7 +2,13 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { Slide, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
-import { HomePage, LoginPage, SignupPage, ProfilePage } from "./pages";
+import {
+  HomePage,
+  LoginPage,
+  SignupPage,
+  ProfilePage,
+  ForgotPassword,
+} from "./pages";
 import { Navbar, PrivateRoute } from "./components";
 import { LocalRoutes } from "./constants";
 
@@ -28,6 +34,14 @@ function App() {
               </PrivateRoute>
             }
             path={LocalRoutes.SIGNUP_PAGE}
+          />
+          <Route
+            element={
+              <PrivateRoute isAuthRoute={true}>
+                <ForgotPassword />
+              </PrivateRoute>
+            }
+            path={LocalRoutes.FORGOT_PASSWORD_PAGE}
           />
           <Route
             element={
