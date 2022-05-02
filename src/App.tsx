@@ -8,6 +8,7 @@ import {
   SignupPage,
   ProfilePage,
   ForgotPassword,
+  PageNotFound,
 } from "./pages";
 import { Navbar, PrivateRoute } from "./components";
 import { LocalRoutes } from "./constants";
@@ -51,6 +52,7 @@ function App() {
             }
             path={LocalRoutes.PROFILE_PAGE}
           />
+          <Route element={<PageNotFound />} path="*" />
         </Routes>
         <ToastContainer
           autoClose={1000}
