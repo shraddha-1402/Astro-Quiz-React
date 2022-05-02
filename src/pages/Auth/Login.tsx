@@ -7,6 +7,7 @@ import { useAuth } from "../../contexts";
 import { LoginCreds } from "../../types";
 import { LocalRoutes, TestCredentials } from "../../constants";
 import "./style.css";
+import { useDynamicTitle } from "../../hooks";
 
 const LoginPage = () => {
   const [{ email, password }, setLoginCredentials] = useState<LoginCreds>({
@@ -29,6 +30,8 @@ const LoginPage = () => {
     event.preventDefault();
     loginHandler({ credentials: { email, password }, authDispatch, navigate });
   };
+
+  useDynamicTitle();
 
   return (
     <main className="card mw-28r p-1 my-3-5 mx-auto">

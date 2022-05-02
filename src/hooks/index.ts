@@ -1,0 +1,1 @@
+export { useDynamicTitle } from "./useDynamicTitle";

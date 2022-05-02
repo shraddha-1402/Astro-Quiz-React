@@ -1,8 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { LocalRoutes } from "../constants";
+import { useDynamicTitle } from "../hooks";
 
 const PageNotFound = () => {
   const navigate = useNavigate();
+  useDynamicTitle();
+
   return (
     <div className="flex-col align-center gap-1">
       <h1 className="center-text m-1">404 Page Not Found</h1>
