@@ -5,12 +5,14 @@ import { auth, db } from "..";
 import {
   AuthErrorCodes,
   createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { ActionType, LocalRoutes } from "../constants";
 import { AuthAction, LoginCreds, SignupCred } from "../types";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { isFBError } from "../types/typeguards";
+import { FirebaseError } from "firebase/app";
 
 const loginHandler = async ({
   credentials,
@@ -38,7 +40,11 @@ const loginHandler = async ({
       localStorage.setItem("quizUserData", JSON.stringify(quizUserData));
       navigate(LocalRoutes.HOME);
       toast.success("Logged in successfully!");
-    }
+    } else
+      throw new FirebaseError(
+        "auth/User-data-does-not-exists",
+        "Firebase: Error"
+      );
   } catch (error: unknown) {
     if (isFBError(error)) {
       switch (error.code) {
@@ -90,4 +96,21 @@ const signupHandler = async ({
   }
 };
 
-export { loginHandler, signupHandler };
+const resetPasswordHandler = async ({
+  email,
+  navigate,
+}: {
+  email: string;
+  navigate: NavigateFunction;
+}) => {
+  try {
+    await sendPasswordResetEmail(auth, email);
+    toast.success("Password reset link sent");
+    navigate(LocalRoutes.LOGIN_PAGE);
+  } catch (error) {
+    if (isFBError(error))
+      toast.error(`${error.code.split("/")[1].split("-").join(" ")}`);
+  }
+};
+
+export { loginHandler, signupHandler, resetPasswordHandler };
