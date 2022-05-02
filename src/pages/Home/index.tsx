@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { DocumentData } from "firebase/firestore";
 import { getFeaturedQuizes } from "../../handlers";
 import "./style.css";
+import { useDynamicTitle } from "../../hooks";
 
 const HomePage = () => {
   const [featuredQuizes, setFeaturedQuizes] = useState<DocumentData[]>([]);
@@ -10,6 +11,8 @@ const HomePage = () => {
       setFeaturedQuizes(await getFeaturedQuizes());
     })();
   }, []);
+
+  useDynamicTitle();
 
   return (
     <div>

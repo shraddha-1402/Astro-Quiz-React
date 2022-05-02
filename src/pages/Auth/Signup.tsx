@@ -5,6 +5,7 @@ import { FormInput } from "../../components";
 import { LocalRoutes } from "../../constants";
 import { SignupCred } from "../../types/auth";
 import { signupHandler } from "../../handlers";
+import { useDynamicTitle } from "../../hooks";
 
 const SignupPage = () => {
   const [
@@ -34,6 +35,7 @@ const SignupPage = () => {
       navigate,
     });
   };
+  useDynamicTitle();
 
   return (
     <main className="card mw-28r p-1 my-3-5 mx-auto">

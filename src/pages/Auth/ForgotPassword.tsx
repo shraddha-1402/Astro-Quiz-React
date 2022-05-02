@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FormInput } from "../../components";
 import { resetPasswordHandler } from "../../handlers";
 import { LocalRoutes } from "../../constants";
+import { useDynamicTitle } from "../../hooks";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -13,6 +14,8 @@ const ForgotPassword = () => {
   };
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) =>
     setEmail(event.target.value);
+
+  useDynamicTitle();
 
   return (
     <main className="card mw-28r p-1 my-3-5 mx-auto">

@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ActionType, LocalRoutes } from "../../constants";
 import { useAuth } from "../../contexts";
+import { useDynamicTitle } from "../../hooks";
 
 const ProfilePage = () => {
   const {
@@ -16,6 +17,8 @@ const ProfilePage = () => {
     navigate(LocalRoutes.HOME);
     toast.success("Logged Out");
   };
+
+  useDynamicTitle();
 
   return (
     <main className="container mw-28r my-3-5 mx-auto flex-col align-center">
