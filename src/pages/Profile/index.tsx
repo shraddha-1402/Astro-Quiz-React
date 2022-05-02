@@ -20,7 +20,7 @@ const ProfilePage = () => {
   return (
     <main className="container mw-28r my-3-5 mx-auto flex-col align-center">
       <h1 className="center-text m-1">Profile</h1>
-      <div className="my-1-5 w-100p">
+      <div className="my-1-5 w-100p px-1">
         <p className="my-0-5">
           <span className="disp-inline-block w-30p mr-0-5">Full Name:</span>
           {name}
