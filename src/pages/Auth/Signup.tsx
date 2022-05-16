@@ -86,16 +86,6 @@ const SignupPage = () => {
             </span>
           </div>
 
-          <div className="my-1">
-            <input type="checkbox" id="term-and-condition" required />
-            <label className="ml-0-25" htmlFor="term-and-condition">
-              I accept all
-              <a href="#" target="_blank" className="link ml-0-25">
-                Terms and Conditions<span className="red-text">*</span>
-              </a>
-            </label>
-          </div>
-
           <button className="btn btn-solid-primary w-100p my-0-25 mt-1 text-bold-weight">
             SIGNUP
           </button>
