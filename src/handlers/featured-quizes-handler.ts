@@ -1,5 +1,5 @@
 import { collection, DocumentData, getDocs } from "firebase/firestore";
-import { db } from "..";
+import { db } from "../firebase";
 
 const getFeaturedQuizes = async () => {
   try {
