@@ -40,11 +40,9 @@ const HomePage = () => {
                   <h3> {name} </h3>
                   <p className="sm-text">{level}</p>
                   <p className="sm-text">{description}</p>
-                  <a href="/Pages/rules.html" className="link">
-                    <button className="btn btn-solid-primary mt-1 mb-0-5 w-100p quiz-card-btn">
-                      Play Now
-                    </button>
-                  </a>
+                  <button className="btn btn-solid-primary mt-1 mb-0-5 w-100p quiz-card-btn">
+                    Play Now
+                  </button>
                 </div>
               </div>
             );
