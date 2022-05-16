@@ -1,7 +1,7 @@
 import { Dispatch } from "react";
 import { NavigateFunction } from "react-router-dom";
 import { toast } from "react-toastify";
-import { auth, db } from "..";
+import { auth, db } from "../firebase.config";
 import {
   AuthErrorCodes,
   createUserWithEmailAndPassword,
