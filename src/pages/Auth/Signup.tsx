@@ -5,6 +5,7 @@ import { FormInput } from "../../components";
 import { LocalRoutes } from "../../constants";
 import { SignupCred } from "../../types/auth";
 import { signupHandler } from "../../handlers";
+import { useLoader } from "../../contexts";
 import { useDynamicTitle } from "../../hooks";
 
 const SignupPage = () => {
@@ -25,6 +26,7 @@ const SignupPage = () => {
     }));
   };
 
+  const { setIsLoading } = useLoader();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState<Boolean>(false);
 
@@ -33,6 +35,7 @@ const SignupPage = () => {
     signupHandler({
       credentials: { firstName, lastName, email, password },
       navigate,
+      setIsLoading,
     });
   };
   useDynamicTitle();

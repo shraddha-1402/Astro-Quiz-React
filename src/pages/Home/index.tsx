@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
 import { DocumentData } from "firebase/firestore";
 import { getFeaturedQuizes } from "../../handlers";
+import { useLoader } from "../../contexts";
 import "./style.css";
 import { useDynamicTitle } from "../../hooks";
 
 const HomePage = () => {
   const [featuredQuizes, setFeaturedQuizes] = useState<DocumentData[]>([]);
+
+  const { setIsLoading } = useLoader();
+
   useEffect(() => {
     (async () => {
-      setFeaturedQuizes(await getFeaturedQuizes());
+      setFeaturedQuizes(await getFeaturedQuizes({ setIsLoading }));
     })();
   }, []);
 

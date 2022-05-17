@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { BiHide, BiShow } from "react-icons/bi";
 import { FormInput } from "../../components";
 import { loginHandler } from "../../handlers";
-import { useAuth } from "../../contexts";
+import { useAuth, useLoader } from "../../contexts";
 import { LoginCreds } from "../../types";
 import { LocalRoutes, TestCredentials } from "../../constants";
 import "./style.css";
@@ -14,6 +14,7 @@ const LoginPage = () => {
     email: "",
     password: "",
   });
+  const { setIsLoading } = useLoader();
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setLoginCredentials((loginCredentials) => ({
@@ -28,7 +29,12 @@ const LoginPage = () => {
 
   const handleLoginSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    loginHandler({ credentials: { email, password }, authDispatch, navigate });
+    loginHandler({
+      credentials: { email, password },
+      authDispatch,
+      navigate,
+      setIsLoading,
+    });
   };
 
   useDynamicTitle();

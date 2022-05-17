@@ -10,12 +10,16 @@ import {
   ForgotPassword,
   PageNotFound,
 } from "./pages";
-import { Navbar, PrivateRoute } from "./components";
+import { Navbar, PrivateRoute, Loader } from "./components";
+import { useLoader } from "./contexts";
 import { LocalRoutes } from "./constants";
 
 function App() {
+  const { isLoading } = useLoader();
+
   return (
     <div className="bg-img">
+      <div> {isLoading && <Loader />} </div>
       <Navbar />
       <main className="content-body">
         <Routes>
