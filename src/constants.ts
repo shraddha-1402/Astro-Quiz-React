@@ -22,6 +22,7 @@ enum LocalRoutes {
   FORGOT_PASSWORD_PAGE = "/forgot-password-page",
   PROFILE_PAGE = "/profile-page",
   QUIZ_PAGE = "/quiz-page",
+  RESULT_PAGE = "/result-page",
 }
 
 enum TestCredentials {
