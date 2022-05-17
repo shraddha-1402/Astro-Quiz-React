@@ -9,6 +9,8 @@ import {
   ProfilePage,
   ForgotPassword,
   PageNotFound,
+  RulesPage,
+  ResultsPage,
 } from "./pages";
 import { Navbar, PrivateRoute, Loader } from "./components";
 import { useLoader } from "./contexts";
@@ -55,6 +57,22 @@ function App() {
               </PrivateRoute>
             }
             path={LocalRoutes.PROFILE_PAGE}
+          />
+          <Route
+            element={
+              <PrivateRoute>
+                <RulesPage />
+              </PrivateRoute>
+            }
+            path={`${LocalRoutes.QUIZ_PAGE}/:quizId`}
+          />
+          <Route
+            element={
+              <PrivateRoute>
+                <ResultsPage />
+              </PrivateRoute>
+            }
+            path={LocalRoutes.RESULT_PAGE}
           />
           <Route element={<PageNotFound />} path="*" />
         </Routes>
