@@ -18,12 +18,15 @@ const loginHandler = async ({
   credentials,
   authDispatch,
   navigate,
+  setIsLoading,
 }: {
   credentials: LoginCreds;
   authDispatch: Dispatch<AuthAction>;
   navigate: NavigateFunction;
+  setIsLoading: Dispatch<React.SetStateAction<boolean>>;
 }): Promise<void> => {
   try {
+    setIsLoading(true);
     const { email, password } = credentials;
     const { user } = await signInWithEmailAndPassword(auth, email, password);
     const userData = await getDoc(doc(db, `users/${user.uid}`));
@@ -56,17 +59,22 @@ const loginHandler = async ({
           break;
       }
     } else console.error(error);
+  } finally {
+    setIsLoading(false);
   }
 };
 
 const signupHandler = async ({
   credentials,
   navigate,
+  setIsLoading,
 }: {
   credentials: SignupCred;
   navigate: NavigateFunction;
+  setIsLoading: Dispatch<React.SetStateAction<boolean>>;
 }): Promise<void> => {
   try {
+    setIsLoading(true);
     const { firstName, lastName, email, password } = credentials;
     const { user } = await createUserWithEmailAndPassword(
       auth,
@@ -93,23 +101,30 @@ const signupHandler = async ({
       console.log(error);
       toast.error("Something went wrong", { autoClose: 1500 });
     }
+  } finally {
+    setIsLoading(false);
   }
 };
 
 const resetPasswordHandler = async ({
   email,
   navigate,
+  setIsLoading,
 }: {
   email: string;
   navigate: NavigateFunction;
+  setIsLoading: Dispatch<React.SetStateAction<boolean>>;
 }) => {
   try {
+    setIsLoading(true);
     await sendPasswordResetEmail(auth, email);
     toast.success("Password reset link sent");
     navigate(LocalRoutes.LOGIN_PAGE);
   } catch (error) {
     if (isFBError(error))
       toast.error(`${error.code.split("/")[1].split("-").join(" ")}`);
+  } finally {
+    setIsLoading(false);
   }
 };
 

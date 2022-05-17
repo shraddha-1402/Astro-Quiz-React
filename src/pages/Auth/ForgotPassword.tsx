@@ -3,14 +3,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { FormInput } from "../../components";
 import { resetPasswordHandler } from "../../handlers";
 import { LocalRoutes } from "../../constants";
+import { useLoader } from "../../contexts";
 import { useDynamicTitle } from "../../hooks";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
+  const { setIsLoading } = useLoader();
   const navigate = useNavigate();
   const handlePasswordRestSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    resetPasswordHandler({ email, navigate });
+    resetPasswordHandler({ email, navigate, setIsLoading });
   };
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) =>
     setEmail(event.target.value);

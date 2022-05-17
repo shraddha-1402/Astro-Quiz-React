@@ -1,18 +1,30 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { DocumentData } from "firebase/firestore";
 import { getFeaturedQuizes } from "../../handlers";
-import "./style.css";
+import { useData, useLoader } from "../../contexts";
 import { useDynamicTitle } from "../../hooks";
+import { ActionType, dataStateValue, LocalRoutes } from "../../constants";
+import "./style.css";
 
 const HomePage = () => {
   const [featuredQuizes, setFeaturedQuizes] = useState<DocumentData[]>([]);
+  useDynamicTitle();
+  const navigate = useNavigate();
+  const { setIsLoading } = useLoader();
+  const { dataDispatch } = useData();
+
   useEffect(() => {
     (async () => {
-      setFeaturedQuizes(await getFeaturedQuizes());
+      setFeaturedQuizes(await getFeaturedQuizes({ setIsLoading }));
     })();
+    dataDispatch({
+      type: ActionType.RESET_DATASTATE,
+      payload: {
+        state: dataStateValue,
+      },
+    });
   }, []);
-
-  useDynamicTitle();
 
   return (
     <div>
@@ -43,7 +55,10 @@ const HomePage = () => {
                   <h3> {name} </h3>
                   <p className="sm-text">{level}</p>
                   <p className="sm-text">{description}</p>
-                  <button className="btn btn-solid-primary mt-1 mb-0-5 w-100p quiz-card-btn">
+                  <button
+                    className="btn btn-solid-primary mt-1 mb-0-5 w-100p quiz-card-btn"
+                    onClick={() => navigate(`${LocalRoutes.QUIZ_PAGE}/${id}`)}
+                  >
                     Play Now
                   </button>
                 </div>
