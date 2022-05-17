@@ -15,6 +15,15 @@ const dataStateValue = {
   currentQuestion: -1,
 };
 
+const rules = [
+  "This quiz has 5 questions",
+  "Each question has only one correct answer",
+  "You will get 30 seconds to answer each question",
+  "Once you click next you will not be able to go back to the previous question",
+  "For each correct answer you will be awarded 10 points",
+  "To win you need to score more than 20 points",
+];
+
 enum LocalRoutes {
   HOME = "/",
   LOGIN_PAGE = "/login-page",
@@ -41,4 +50,4 @@ enum ActionType {
 }
 
 export { LocalRoutes, TestCredentials, ActionType };
-export { dataStateValue };
+export { dataStateValue, rules };
