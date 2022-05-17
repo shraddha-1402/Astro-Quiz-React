@@ -4,7 +4,7 @@ import loader from "../../assests/loader.gif";
 const Loader = () => {
   return (
     <div className="loader-container">
-      <img src={loader} />
+      <img src={loader} alt="loader" />
     </div>
   );
 };
