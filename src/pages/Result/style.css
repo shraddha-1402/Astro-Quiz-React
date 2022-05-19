@@ -1,0 +1,14 @@
+.checked-right {
+  background-color: var(--green);
+  color: white;
+  border: 1px solid var(--green);
+}
+
+.checked-wrong {
+  background-color: var(--red);
+  color: white;
+  border: 1px solid var(--red);
+}
+.pointer-event-none {
+  pointer-events: none;
+}
