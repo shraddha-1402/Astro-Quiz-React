@@ -18,6 +18,8 @@ type AuthState = {
   userInfo: {
     email: string | null;
     name: string | null;
+    scoreboard: { quizId: string; score: number; quizName: string }[];
+    userId: string;
   };
 };
 
@@ -35,6 +37,13 @@ interface LogoutAction {
   type: ActionType.USER_LOGOUT;
 }
 
-type AuthAction = LoginAction | LogoutAction;
+interface ScoreboardAction {
+  type: ActionType.SET_SCOREBOARD;
+  payload: {
+    scoreboard: { quizId: string; score: number; quizName: string }[];
+  };
+}
+
+type AuthAction = LoginAction | LogoutAction | ScoreboardAction;
 
 export type { AuthState, DefaultAuthValue, AuthAction, LoginCreds, SignupCred };

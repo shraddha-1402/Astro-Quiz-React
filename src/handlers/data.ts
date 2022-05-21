@@ -1,8 +1,8 @@
 import { Dispatch } from "react";
 import { toast } from "react-toastify";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase.config";
-import { DataAction } from "../types";
+import { AuthAction, DataAction } from "../types";
 import { ActionType } from "../constants";
 import { isFBError } from "../types/typeguards";
 
@@ -56,4 +56,53 @@ const getQuizHandler = async ({
   }
 };
 
-export { getQuizHandler };
+const getUserScore = async ({
+  userId,
+  setIsLoading,
+}: {
+  userId: string;
+  setIsLoading: Dispatch<React.SetStateAction<boolean>>;
+}) => {
+  try {
+    setIsLoading(true);
+    const fbData = await getDoc(doc(db, `users/${userId}`));
+    const userData = fbData.data();
+    if (!userData) throw new Error("!userData");
+    return userData.scoreboard;
+  } catch (error) {
+    if (isFBError(error))
+      toast.error(`${error.code.split("/")[1].split("-").join(" ")}`);
+  } finally {
+    setIsLoading(false);
+  }
+};
+
+const setUserScore = async ({
+  quizDetails,
+  scoreboard,
+  userId,
+  authDispatch,
+}: {
+  quizDetails: { quizId: string; score: number; quizName: string };
+  scoreboard: { quizId: string; score: number; quizName: string }[];
+  userId: string;
+  authDispatch: Dispatch<AuthAction>;
+}) => {
+  try {
+    if (quizDetails.quizName !== "") {
+      const docRef = doc(db, "users", userId);
+      const res = await updateDoc(docRef, {
+        scoreboard: [...scoreboard, quizDetails],
+      });
+      authDispatch({
+        type: ActionType.SET_SCOREBOARD,
+        payload: { scoreboard: [...scoreboard, quizDetails] },
+      });
+    }
+  } catch (error) {
+    if (isFBError(error))
+      toast.error(`${error.code.split("/")[1].split("-").join(" ")}`);
+  }
+};
+
+export { getQuizHandler, setUserScore, getUserScore };

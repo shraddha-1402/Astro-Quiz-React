@@ -3,7 +3,10 @@ import { authReducer } from "../reducers";
 import { DefaultAuthValue } from "../types";
 
 const AuthContext = createContext<DefaultAuthValue>({
-  authState: { token: "", userInfo: { email: "", name: "" } },
+  authState: {
+    token: "",
+    userInfo: { email: "", name: "", scoreboard: [], userId: "" },
+  },
   authDispatch: () => {},
 });
 const useAuth = () => useContext(AuthContext);

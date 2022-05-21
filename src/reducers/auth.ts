@@ -12,7 +12,15 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
       localStorage.clear();
       return {
         token: null,
-        userInfo: { email: "", name: "" },
+        userInfo: { email: "", name: "", scoreboard: [], userId: "" },
+      };
+    case ActionType.SET_SCOREBOARD:
+      return {
+        ...state,
+        userInfo: {
+          ...state.userInfo,
+          scoreboard: action.payload.scoreboard,
+        },
       };
     default:
       return state;

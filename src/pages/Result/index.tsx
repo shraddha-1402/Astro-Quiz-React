@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { LocalRoutes } from "../../constants";
-import { useData } from "../../contexts";
+import { useAuth, useData } from "../../contexts";
+import { setUserScore } from "../../handlers/data";
 import { useDynamicTitle } from "../../hooks";
 import "./style.css";
 
 const ResultsPage = () => {
+  const { quizId } = useParams();
   const navigate = useNavigate();
   useDynamicTitle();
 
@@ -13,9 +15,15 @@ const ResultsPage = () => {
     dataState: {
       userSelectedAnswers,
       isQuizSelected,
-      currentQuiz: { questions },
+      currentQuiz: { questions, name },
     },
   } = useData();
+  const {
+    authState: {
+      userInfo: { scoreboard, userId },
+    },
+    authDispatch,
+  } = useAuth();
 
   const getClass = (
     index: number,
@@ -39,9 +47,17 @@ const ResultsPage = () => {
     questions.forEach((question, index) => {
       if (question.answerIndex === userSelectedAnswers[index]) score += 10;
     });
-    if (result.score > 20)
+    if (score > 20)
       setResult({ score, message: "Congratulations! You won the quiz 🎉🎉" });
     else setResult({ score, message: "Oops! Better luck next time!" });
+    const quizDetails = {
+      quizId: quizId || "",
+      score,
+      quizName: name,
+    };
+    (async () => {
+      await setUserScore({ quizDetails, scoreboard, authDispatch, userId });
+    })();
   }, []);
 
   return (
