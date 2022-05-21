@@ -1,46 +1,65 @@
-# Getting Started with Create React App
+<div align="center">
+  <h1>Astro Quiz React</h1>
+    <p>A Quiz For All The Astronomy Nerds Out There</p>
+ </div>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Live Link
 
-## Available Scripts
+[Astro Quiz React](https://astro-quiz-react.netlify.app)
 
-In the project directory, you can run:
+## Demo Video
 
-### `npm start`
+[Click to watch on YouTube](https://youtu.be/APqNPOzzn-Q)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Screens in this project
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Authentication (Login, Signup, Forgot Password) Pages
+- Profile Page
+- Home Page
+- Rules Page
+- Quiz Pages
+- Result Page
+- Scoreboard Page
+- 404 (Not Found) Page
 
-### `npm test`
+## Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- User can visit the home page and check all the quizes available
+- After clicking on Play quiz, if not logged in they'll be redirected to Login Page
+- If not logged in, they can visit signup page and create a account
+- If the user has forgotten password, they can visit the forgot password page, and they'll be given a link on their mail to reset the password
+- On starting the quiz, Rules page will be shown
+- Each quiz has 5 questions, and 4 options
+- A timer of 30 seconds is there for every question, if the user does not select any option they will be automatically redirected to the next question
+- User can quit a quiz in between, by clicking the quit button
+- Once the quiz is completed, user will be redirected to the Result page
+- All the questions with the user selected answers and the correct answers will be displayed
+- The user can check their score by visiting the scoreboard page
+- They can retake the quiz from the scoreboard page itself
 
-### `npm run build`
+## Tech Stack and Tools
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/typescript/typescript.png" height="48"/>
+<img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png" height="48"/>
+<img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/firebase/firebase.png" height="48"/>
+<img src="https://img.icons8.com/color/48/000000/git.png"/> 
+<img src="https://seeklogo.com/images/N/netlify-logo-758722CDF4-seeklogo.com.png" height="48">
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+And
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Own CSS component library
 
-### `npm run eject`
+## How to run the app locally?
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+$ git clone https://github.com/shraddha-1402/Astro-Quiz-React
+$ cd Astro-Quiz-React
+$ npm install
+$ npm start
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Connect with me on
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+[![LinkedIn](https://img.shields.io/badge/LINKEDIN-10?logo=linkedin&color=blue)](https://www.linkedin.com/in/shraddha-1402/)
+[![GitHub](https://img.shields.io/badge/GITHUB-10?logo=github&color=black)](https://github.com/shraddha-1402)
+[![Twitter](https://img.shields.io/badge/TWITTER-10?logo=twitter&logoColor=white&color=blue)](https://twitter.com/ShraddhaGupta08)
