@@ -32,6 +32,7 @@ enum LocalRoutes {
   PROFILE_PAGE = "/profile-page",
   QUIZ_PAGE = "/quiz-page",
   RESULT_PAGE = "/result-page",
+  SCOREBOARD_PAGE = "/scoreboard",
 }
 
 enum TestCredentials {
@@ -42,6 +43,7 @@ enum TestCredentials {
 enum ActionType {
   USER_LOGIN = "USER_LOGIN",
   USER_LOGOUT = "USER_LOGOUT",
+  SET_SCOREBOARD = "SET_SCOREBOARD",
   SET_CURRENT_QUIZ = "SET_CURRENT_QUIZ",
   SET_CURRENT_QUESTION = "SET_CURRENT_QUESTION",
   SET_USER_SELECTED_ANSWERS = "SET_USER_SELECTED_ANSWERS",
