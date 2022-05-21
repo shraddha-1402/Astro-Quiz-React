@@ -4,3 +4,4 @@ export { ProfilePage } from "./Profile";
 export { PageNotFound } from "./404";
 export { RulesPage } from "./Rules";
 export { ResultsPage } from "./Result";
+export { Scoreboard } from "./Scoreboard";
