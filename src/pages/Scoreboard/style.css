@@ -1,0 +1,18 @@
+.score-card {
+  transition: transform 0.2s ease-in;
+  border-radius: 0.5rem;
+}
+.score-card:hover {
+  transform: scale(1.02);
+  transition: transform 0.2s ease-out;
+}
+.result-fail-badge {
+  color: var(--red);
+  font-size: 1.1em;
+  font-weight: bold;
+}
+.result-pass-badge {
+  color: var(--green);
+  font-size: 1.1em;
+  font-weight: bold;
+}

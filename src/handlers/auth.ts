@@ -31,10 +31,15 @@ const loginHandler = async ({
     const { user } = await signInWithEmailAndPassword(auth, email, password);
     const userData = await getDoc(doc(db, `users/${user.uid}`));
     if (userData.exists()) {
-      const { firstName, lastName, email } = userData.data();
+      const { firstName, lastName, email, scoreboard } = userData.data();
       const quizUserData = {
         token: await user.getIdToken(),
-        userInfo: { email: email, name: `${firstName} ${lastName}` },
+        userInfo: {
+          email: email,
+          name: `${firstName} ${lastName}`,
+          scoreboard,
+          userId: user.uid,
+        },
       };
       authDispatch({
         type: ActionType.USER_LOGIN,
@@ -83,7 +88,12 @@ const signupHandler = async ({
     );
     const token = await user.getIdToken();
     if (token) {
-      await setDoc(doc(db, "users", user.uid), { firstName, lastName, email });
+      await setDoc(doc(db, "users", user.uid), {
+        firstName,
+        lastName,
+        email,
+        scoreboard: [],
+      });
       navigate(LocalRoutes.LOGIN_PAGE);
       toast.success("Signed up successfully!");
     }

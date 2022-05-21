@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ActionType, LocalRoutes, dataStateValue } from "../../constants";
 import { useData } from "../../contexts";
 import { useDynamicTitle } from "../../hooks";
@@ -7,6 +7,7 @@ import "./style.css";
 
 const QuestionsPage = () => {
   useDynamicTitle();
+  const { quizId } = useParams();
   const navigate = useNavigate();
   const [selectedAnswer, setSelectedAnswer] = useState(-1);
   const [timer, setTimer] = useState(30);
@@ -31,7 +32,7 @@ const QuestionsPage = () => {
         },
       });
       if (currentQuestion === questions.length - 1)
-        navigate(LocalRoutes.RESULT_PAGE, { replace: true });
+        navigate(`${LocalRoutes.RESULT_PAGE}/${quizId}`, { replace: true });
       else {
         dataDispatch({
           type: ActionType.SET_CURRENT_QUESTION,
@@ -68,7 +69,7 @@ const QuestionsPage = () => {
     setTimer(30);
 
     if (currentQuestion === questions.length - 1)
-      navigate(LocalRoutes.RESULT_PAGE, { replace: true });
+      navigate(`${LocalRoutes.RESULT_PAGE}/${quizId}`, { replace: true });
   };
 
   return (

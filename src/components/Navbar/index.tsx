@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaUser, FaTrophy } from "react-icons/fa";
 import { LocalRoutes } from "../../constants";
 import "./style.css";
 import { useAuth } from "../../contexts";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const {
     authState: { token },
   } = useAuth();
@@ -16,7 +17,11 @@ const Navbar = () => {
         </Link>
 
         <div className="flex-row gap-1 align-center m-0-5">
-          <FaTrophy className="sm-icon mr-1 curr-pointer" title="Dashboard" />
+          <FaTrophy
+            onClick={() => navigate(LocalRoutes.SCOREBOARD_PAGE)}
+            className="sm-icon mr-1 curr-pointer"
+            title="Dashboard"
+          />
           <Link
             to={token ? LocalRoutes.PROFILE_PAGE : LocalRoutes.LOGIN_PAGE}
             className="link"

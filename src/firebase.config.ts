@@ -20,7 +20,7 @@ export const auth = getAuth();
 // Create a root reference
 export const storage = getStorage(app);
 
-if (process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV === "test") {
   try {
     connectFirestoreEmulator(db, "localhost", 8080);
     connectAuthEmulator(auth, "http://localhost:9099");
